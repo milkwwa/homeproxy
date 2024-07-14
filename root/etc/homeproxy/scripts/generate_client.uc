@@ -282,7 +282,7 @@ function generate_outbound(node) {
 		tcp_fast_open: strToBool(node.tcp_fast_open),
 		tcp_multi_path: strToBool(node.tcp_multi_path),
 		udp_fragment: strToBool(node.udp_fragment),
-		detour: node.detour
+		detour: (node.enable_detour === '1') ? (node.detour_tag) : null
 	};
 
 	return outbound;
