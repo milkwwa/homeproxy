@@ -1320,6 +1320,33 @@ return view.extend({
 		so.default = '2';
 		so.depends('udp_over_tcp', '1');
 		so.modalonly = true;
+
+
+		/* detour settings start */
+		so = ss.option(form.Flag, 'enable_detour', _('Detour settings'));
+		so.default = so.disabled;
+		so.modalonly = true;
+
+		so = ss.option(form.ListValue, 'detour', _('Detour Tag'),
+		    _('Select the detour tag from the configured nodes.'));
+		so.load = function(section_id) {
+		    delete this.keylist;
+		    delete this.vallist;
+
+		    // 获取已配置的节点标签
+			this.value('direct-out', _('Direct'));
+			this.value('block-out', _('Block'));
+		    uci.sections(data[0], 'node', (res) => {
+		        if (res.label) {
+		            this.value(res.label, res.label);
+		        }
+		    });
+
+		    return this.super('load', section_id);
+		};
+		so.modalonly = true;
+		so.depends('enable_detour', '1'); // 只有启用了 Detour 才显示
+		/* detour settings end */
 		/* Extra settings end */
 		/* Nodes settings end */
 
