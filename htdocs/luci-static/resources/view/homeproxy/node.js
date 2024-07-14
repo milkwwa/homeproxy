@@ -1327,7 +1327,7 @@ return view.extend({
 		so.default = so.disabled;
 		so.modalonly = true;
 
-		so = ss.option(form.ListValue, 'detour', _('Detour Tag'),
+		so = ss.option(form.ListValue, 'detour_tag', _('Detour Tag'),
 		    _('Select the detour tag from the configured nodes.'));
 		so.load = function(section_id) {
 		    delete this.keylist;
